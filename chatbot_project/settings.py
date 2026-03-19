@@ -24,9 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-u!y1q6)h-=t+x9i1)zb)d=9(11l!&h+i9#ylcy71#swsrw+pf('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+DEBUG = False
 
 
 # Application definition
@@ -40,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'chatterbot.ext.django_chatterbot',
     'chatbot',
 
 ]
@@ -74,6 +71,7 @@ CHATTERBOT = {
     ],
 }
 
+
 ROOT_URLCONF = 'chatbot_project.urls'
 
 TEMPLATES = [
@@ -101,6 +99,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        
     }
 }
 
@@ -149,3 +148,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ALLOWED_HOSTS = ['*']
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+CHATTERBOT = {
+    'name': 'MyBot',
+    'logic_adapters': [
+        'chatterbot.logic.BestMatch'
+    ],
+    'django_app_name': 'chatbot'
+}
