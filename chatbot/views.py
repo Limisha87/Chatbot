@@ -1,10 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.http import JsonResponse
+from django.shortcuts import render
 
 
 def home(request):
-    return JsonResponse({"status": "ok", "message": "Chatbot API is running."})
+    return render(request, 'index.html')
 
 
 def get_bot_response(message: str) -> str:
