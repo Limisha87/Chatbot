@@ -3,6 +3,6 @@ pip>=23.3
 Django==4.2.7
 djangorestframework==3.14.0
 gunicorn==21.2.0
-rasa==3.7.1
+chainlit==2.10.0
 
 

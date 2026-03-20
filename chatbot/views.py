@@ -1,5 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.http import JsonResponse
+
+
+def home(request):
+    return JsonResponse({"status": "ok", "message": "Chatbot API is running."})
 
 
 def get_bot_response(message: str) -> str:
@@ -22,9 +27,9 @@ def get_bot_response(message: str) -> str:
 
 class ChatBotView(APIView):
     def post(self, request):
-        user_message = request.data.get('message')
-        if not user_message:
-            return Response({"error": "Message is required."}, status=400)
-
+        user_message = request.data.get('message', '')
         response_text = get_bot_response(user_message)
         return Response({"response": response_text})
+
+    def get(self, request):
+        return Response({"response": "Send a POST with JSON {\"message\": \"...\"} to chat."})
