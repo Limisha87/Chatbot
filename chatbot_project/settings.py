@@ -62,16 +62,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 
-CHATTERBOT = {
-    'name': 'Python 3.12 Bot',
-    'storage_adapter': 'chatterbot.storage.DjangoStorageAdapter',
-    'logic_adapters': [
-        'chatterbot.logic.BestMatch',
-        'chatterbot.logic.MathematicalEvaluation'
-    ],
-}
-
-
 ROOT_URLCONF = 'chatbot_project.urls'
 
 TEMPLATES = [
@@ -148,11 +138,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ALLOWED_HOSTS = ['*']
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-CHATTERBOT = {
-    'name': 'MyBot',
-    'logic_adapters': [
-        'chatterbot.logic.BestMatch'
-    ],
-    'django_app_name': 'chatbot'
-}

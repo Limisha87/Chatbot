@@ -1,17 +1,24 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from chatterbot import ChatBot
 
-chatbot = ChatBot(
-    'MyBot',
-    storage_adapter='chatterbot.storage.SQLStorageAdapter',
-    database_uri='sqlite:///db.sqlite3',
-    read_only=True,
-    logic_adapters=[
-        'chatterbot.logic.BestMatch',
-        'chatterbot.logic.MathematicalEvaluation'
-    ]
-)
+
+def get_bot_response(message: str) -> str:
+    text = message.strip().lower()
+    if not text:
+        return "Please type something so I can respond."
+    if "hello" in text or "hi" in text:
+        return "Hello! How can I help you today?"
+    if "bye" in text or "goodbye" in text:
+        return "Goodbye! Have a great day."
+    if "how are" in text:
+        return "I'm doing great, thanks! How are you?"
+    if "help" in text:
+        return "Sure, I can help. Tell me what you need."
+    if "time" in text:
+        from datetime import datetime
+        return f"Current time is {datetime.now().strftime('%H:%M:%S')}"
+    return "I don't fully understand yet, but I am learning!"
+
 
 class ChatBotView(APIView):
     def post(self, request):
@@ -19,5 +26,5 @@ class ChatBotView(APIView):
         if not user_message:
             return Response({"error": "Message is required."}, status=400)
 
-        response = chatbot.get_response(user_message)
-        return Response({"response": str(response)})
+        response_text = get_bot_response(user_message)
+        return Response({"response": response_text})
