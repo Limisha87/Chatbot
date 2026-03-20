@@ -1,9 +1,16 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import render
+from django.http import JsonResponse
+from django.template import TemplateDoesNotExist
+from django.template.loader import get_template
 
 
 def home(request):
+    try:
+        get_template('index.html')
+    except TemplateDoesNotExist:
+        return JsonResponse({"status": "ok", "message": "Frontend not built yet. Run npm run build."})
     return render(request, 'index.html')
 
 
