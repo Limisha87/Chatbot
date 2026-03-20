@@ -1,8 +1,12 @@
+
+# ensure wheel builds work
 wheel
 pip>=23.3
+
+# Django + API
 Django==4.2.7
 djangorestframework==3.14.0
 gunicorn==21.2.0
-rasa==1.10.2
 
-
+# Rasa latest stable version compatible with Python 3.10
+rasa==3.7.1
