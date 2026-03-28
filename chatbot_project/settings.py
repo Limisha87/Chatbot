@@ -50,12 +50,9 @@ MIDDLEWARE = [
     
 ]
 
-# Set this to False
-CORS_ALLOW_ALL_ORIGINS = True
-
-# Then add this list
+# settings.py
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
+    "https://limisha123.github.io/chatbot-frontend",
 ]
 
 ROOT_URLCONF = 'chatbot_project.urls'

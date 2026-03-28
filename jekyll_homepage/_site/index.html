@@ -36,20 +36,20 @@
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <h1 style="text-align:center; margin-top:50px;">Welcome to My Website</h1>
-<p style="text-align:center;">This is a demo homepage content.</p>
+        <h1 style="text-align:center; margin-top:50px;">Welcome to TrackIn-Take Bot</h1>
+<p style="text-align:center;">Select a category and click on a question to get the answer.</p>
 
-<!-- ✅ CHAT ICON -->
-<div class="chat-icon" id="chatIcon">
+<!-- CHAT ICON -->
+<div id="chatIcon" class="chat-icon">
   <img src="/assets/icon.png" alt="chat" />
 </div>
 
-<!-- ✅ CHATBOX -->
-<div class="chat-container" id="chatBox">
+<!-- CHAT CONTAINER -->
+<div id="chatBox" class="chat-container">
   <div class="chat-header">TrackIn-Take Bot</div>
 
   <!-- Categories -->
-  <div class="category-bar" id="categories"></div>
+  <div id="categories" class="category-bar"></div>
 
   <!-- Questions -->
   <div id="questions"></div>
@@ -62,38 +62,35 @@
   right: 20px;
   width: 65px;
   height: 65px;
-  z-index: 999999;
   cursor: pointer;
+  z-index: 1000;
 }
-
 .chat-icon img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
 }
-
 .chat-container {
   position: fixed;
   bottom: 100px;
   right: 20px;
-  width: 320px;
-  height: 420px;
+  width: 350px;
+  height: 500px;
   background: white;
   border-radius: 20px;
   display: none;
   flex-direction: column;
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   overflow: hidden;
+  z-index: 999;
 }
-
 .chat-header {
   background: orange;
   color: white;
-  padding: 12px;
   text-align: center;
+  padding: 12px;
   font-weight: bold;
 }
-
 .category-bar {
   display: flex;
   flex-wrap: wrap;
@@ -101,7 +98,6 @@
   padding: 10px;
   justify-content: center;
 }
-
 .category-bar button {
   padding: 6px 12px;
   border-radius: 15px;
@@ -111,31 +107,26 @@
   cursor: pointer;
   font-size: 12px;
 }
-
 .category-bar button:hover {
   background: orange;
   color: white;
 }
-
 #questions {
   padding: 10px;
   overflow-y: auto;
   flex: 1;
-  text-align: center; /* ✅ CENTER FIX */
+  text-align: center;
 }
-
 .faq-item {
   text-align: left;
   margin-bottom: 8px;
 }
-
 .faq-question {
   background: #f2f2f2;
   padding: 8px;
   border-radius: 10px;
   cursor: pointer;
 }
-
 .faq-answer {
   background: #ff6600;
   color: white;
@@ -156,10 +147,19 @@ const questionDiv = document.getElementById("questions");
 
 let activeCategory = null;
 
-// ✅ Categories
+// Toggle chatbox
+chatIcon.addEventListener("click", function(){
+    if(chatBox.style.display === "flex"){
+        chatBox.style.display = "none";
+    } else {
+        chatBox.style.display = "flex";
+    }
+});
+
+// Categories
 const categories = ["Diet","Fitness","Lifestyle","Nutrition","Veg","Non-Veg","Tools","Help"];
 
-// ✅ FAQs
+// FAQs
 const faqs = [
 
   // DIET
@@ -219,77 +219,63 @@ const faqs = [
 
 ];
 
-// ✅ Toggle Chat
-chatIcon.onclick = () => {
-  chatBox.style.display =
-    (chatBox.style.display === "flex") ? "none" : "flex";
-};
-
-// ✅ Backend call
-async function fetchBotAnswer(msg, answerBox) {
-  try {
-    const response = await fetch("http://127.0.0.1:8000/api/chat/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ question: msg.toLowerCase() })
-    });
-
-    const data = await response.json();
-
-    answerBox.innerHTML = data.answer;
-    answerBox.style.display = "block";
-
-  } catch (error) {
-    answerBox.innerHTML = "Backend not connected!";
-    answerBox.style.display = "block";
-  }
-}
-
-// ✅ Categories render
+// Render categories
 categories.forEach(cat => {
   const btn = document.createElement("button");
   btn.textContent = cat;
-
-  btn.onclick = () => {
-    activeCategory = cat;
-    renderFAQs();
-  };
-
+  btn.addEventListener("click", function(){
+      activeCategory = cat;
+      renderFAQs();
+  });
   categoryDiv.appendChild(btn);
 });
 
-// ✅ Questions render
+// Backend call
+async function sendMessage(msg, answerDiv){
+    if(!msg) return;
+    try{
+        const response = await fetch("https://chatbot-s7uc.onrender.com/api/chat/", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({message: msg})
+        });
+        const data = await response.json();
+        answerDiv.style.display = "block";
+        answerDiv.textContent = data.answer;
+    } catch(err){
+        console.error("Backend not connected!", err);
+        answerDiv.style.display = "block";
+        answerDiv.textContent = "Backend not connected!";
+    }
+}
+
+// Render FAQs
 function renderFAQs(){
-  questionDiv.innerHTML = "";
+    questionDiv.innerHTML = "";
+    if(!activeCategory){
+        questionDiv.innerHTML = "<p style='text-align:center; color:#999;'>Select category 👆</p>";
+        return;
+    }
+    const filtered = faqs.filter(f => f.category === activeCategory);
+    filtered.forEach(item => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "faq-item";
 
-  if(!activeCategory){
-    questionDiv.innerHTML =
-      "<p style='text-align:center; color:#999;'>Select category 👆</p>";
-    return;
-  }
+        const q = document.createElement("div");
+        q.className = "faq-question";
+        q.textContent = item.question;
 
-  const filtered = faqs.filter(f => f.category === activeCategory);
+        const ans = document.createElement("div");
+        ans.className = "faq-answer";
 
-  filtered.forEach(item => {
+        q.addEventListener("click", function(){
+            sendMessage(item.question, ans);
+        });
 
-    const wrapper = document.createElement("div");
-    wrapper.className = "faq-item";
-
-    const q = document.createElement("div");
-    q.className = "faq-question";
-    q.textContent = item.question;
-
-    const ans = document.createElement("div");
-    ans.className = "faq-answer";
-
-    q.onclick = () => {
-      fetchBotAnswer(item.question, ans);
-    };
-
-    wrapper.appendChild(q);
-    wrapper.appendChild(ans);
-    questionDiv.appendChild(wrapper);
-  });
+        wrapper.appendChild(q);
+        wrapper.appendChild(ans);
+        questionDiv.appendChild(wrapper);
+    });
 }
 
 // Init
