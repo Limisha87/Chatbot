@@ -52,7 +52,7 @@ MIDDLEWARE = [
 
 # settings.py
 CORS_ALLOWED_ORIGINS = [
-     "https://limisha87.github.io/Chatbot/"
+     "https://limisha87.github.io"
 ]
 
 ROOT_URLCONF = 'chatbot_project.urls'
