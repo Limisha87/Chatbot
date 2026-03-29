@@ -11,7 +11,6 @@ title: Home
   <img src="/assets/icon.png" alt="chat">
 </div>
 
-const API_URL = "https://chatbot-backend.onrender.com/api/";
 
 <!-- CHAT CONTAINER -->
 <div id="chatBox" class="chat-container">
@@ -203,7 +202,7 @@ categories.forEach(cat => {
 async function sendMessage(msg, answerDiv){
     if(!msg) return;
     try{
-        const response = await fetch("http://127.0.0.1:8000/api/chat/", {
+        const response = await fetch("https://chatbot-3-3cn3.onrender.com/api/chat/", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({message: msg})
