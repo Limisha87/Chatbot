@@ -52,9 +52,9 @@ MIDDLEWARE = [
 
 # settings.py
 CORS_ALLOWED_ORIGINS = [
-    "https://limisha123.github.io/chatbot-frontend",
+    "http://127.0.0.1:4000",
+    "http://localhost:4000",
 ]
-
 ROOT_URLCONF = 'chatbot_project.urls'
 
 TEMPLATES = [
@@ -73,7 +73,7 @@ TEMPLATES = [
 ]
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR.parent / 'chatbot-frontend' / 'dist']
+
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 WSGI_APPLICATION = 'chatbot_project.wsgi.application'
