@@ -1,43 +1,46 @@
 ---
-layout: default
-title: Home
+layout: null
 ---
 
-<h1 style="text-align:center; margin-top:50px;">Welcome to TrackIn-Take Bot</h1>
-<p style="text-align:center;">Select a category and click on a question to get the answer.</p>
-
-<!-- CHAT ICON -->
-<div id="chatIcon" class="chat-icon">
-  <img src="/assets/icon.png" alt="chat">
-</div>
-
-
-<!-- CHAT CONTAINER -->
-<div id="chatBox" class="chat-container">
-  <div class="chat-header">TrackIn-Take Bot</div>
-
-  <!-- Categories -->
-  <div id="categories" class="category-bar"></div>
-
-  <!-- Questions -->
-  <div id="questions"></div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrackIn-Take Bot</title>
 
 <style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #fff5ec, #ffe0cc);
+}
+
+/* CHAT ICON */
 .chat-icon {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 65px;
-  height: 65px;
+  width: 70px;
+  height: 70px;
   cursor: pointer;
   z-index: 1000;
+  animation: pulse 2s infinite;
 }
 .chat-icon img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
 }
+
+/* Animation */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* CHAT BOX */
 .chat-container {
   position: fixed;
   bottom: 100px;
@@ -52,6 +55,7 @@ title: Home
   overflow: hidden;
   z-index: 999;
 }
+
 .chat-header {
   background: orange;
   color: white;
@@ -59,6 +63,7 @@ title: Home
   padding: 12px;
   font-weight: bold;
 }
+
 .category-bar {
   display: flex;
   flex-wrap: wrap;
@@ -66,6 +71,7 @@ title: Home
   padding: 10px;
   justify-content: center;
 }
+
 .category-bar button {
   padding: 6px 12px;
   border-radius: 15px;
@@ -75,26 +81,29 @@ title: Home
   cursor: pointer;
   font-size: 12px;
 }
+
 .category-bar button:hover {
   background: orange;
   color: white;
 }
+
 #questions {
   padding: 10px;
   overflow-y: auto;
   flex: 1;
-  text-align: center;
 }
+
 .faq-item {
-  text-align: left;
   margin-bottom: 8px;
 }
+
 .faq-question {
   background: #f2f2f2;
   padding: 8px;
   border-radius: 10px;
   cursor: pointer;
 }
+
 .faq-answer {
   background: #ff6600;
   color: white;
@@ -104,6 +113,22 @@ title: Home
   display: none;
 }
 </style>
+</head>
+
+<body>
+
+<!-- CHAT ICON -->
+<div id="chatIcon" class="chat-icon">
+  <img src="assets/icon.png" alt="chat">
+</div>
+
+<!-- CHAT BOX -->
+<div id="chatBox" class="chat-container">
+  <div class="chat-header">TrackIn-Take Bot</div>
+
+  <div id="categories" class="category-bar"></div>
+  <div id="questions"></div>
+</div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -115,13 +140,9 @@ const questionDiv = document.getElementById("questions");
 
 let activeCategory = null;
 
-// Toggle chatbox
+// Toggle chat
 chatIcon.addEventListener("click", function(){
-    if(chatBox.style.display === "flex"){
-        chatBox.style.display = "none";
-    } else {
-        chatBox.style.display = "flex";
-    }
+    chatBox.style.display = (chatBox.style.display === "flex") ? "none" : "flex";
 });
 
 // Categories
@@ -129,80 +150,43 @@ const categories = ["Diet","Fitness","Lifestyle","Nutrition","Veg","Non-Veg","To
 
 // FAQs
 const faqs = [
-
-  // DIET
   { category: "Diet", question: "What is diet plan?" },
   { category: "Diet", question: "How to lose weight?" },
   { category: "Diet", question: "How to gain weight?" },
   { category: "Diet", question: "What is balanced diet?" },
-  { category: "Diet", question: "Best diet for beginners?" },
 
-  // FITNESS
   { category: "Fitness", question: "Best exercise?" },
   { category: "Fitness", question: "Daily workout time?" },
-  { category: "Fitness", question: "Home workout?" },
-  { category: "Fitness", question: "Gym vs home?" },
-  { category: "Fitness", question: "Fitness challenge?" },
 
-  // LIFESTYLE
   { category: "Lifestyle", question: "Healthy lifestyle?" },
   { category: "Lifestyle", question: "Sleep importance?" },
-  { category: "Lifestyle", question: "Daily routine?" },
-  { category: "Lifestyle", question: "Stress control?" },
-  { category: "Lifestyle", question: "Screen time?" },
 
-  // NUTRITION
   { category: "Nutrition", question: "What are proteins?" },
   { category: "Nutrition", question: "What are carbohydrates?" },
-  { category: "Nutrition", question: "What are fats?" },
-  { category: "Nutrition", question: "What are vitamins?" },
-  { category: "Nutrition", question: "What are minerals?" },
-  { category: "Nutrition", question: "What is fiber?" },
 
-  // VEG
   { category: "Veg", question: "Veg protein sources?" },
-  { category: "Veg", question: "Vegetarian diet plan?" },
-  { category: "Veg", question: "Veg breakfast?" },
-  { category: "Veg", question: "Veg lunch?" },
-  { category: "Veg", question: "Veg dinner?" },
-
-  // NON-VEG
-  { category: "Non-Veg", question: "Non-veg protein?" },
   { category: "Non-Veg", question: "Egg benefits?" },
-  { category: "Non-Veg", question: "Chicken diet?" },
-  { category: "Non-Veg", question: "Fish benefits?" },
-  { category: "Non-Veg", question: "Dinner ideas?" },
 
-  // TOOLS
-  { category: "Tools", question: "Track water?" },
-  { category: "Tools", question: "Add meals?" },
   { category: "Tools", question: "Track calories?" },
-  { category: "Tools", question: "BMI calculator?" },
-  { category: "Tools", question: "Progress tracking?" },
-
-  // HELP
-  { category: "Help", question: "How to login?" },
-  { category: "Help", question: "How to signup?" },
-  { category: "Help", question: "Forgot password?" }
-
+  { category: "Help", question: "How to login?" }
 ];
 
 // Render categories
 categories.forEach(cat => {
   const btn = document.createElement("button");
   btn.textContent = cat;
-  btn.addEventListener("click", function(){
-      activeCategory = cat;
-      renderFAQs();
-  });
+  btn.onclick = () => {
+    activeCategory = cat;
+    renderFAQs();
+  };
   categoryDiv.appendChild(btn);
 });
 
-// Backend call
+// Backend URL
 const API_URL = "https://chatbot-3-3cn3.onrender.com/api/chat/";
 
+// API call
 async function sendMessage(msg, answerDiv){
-    if(!msg) return;
     try{
         const response = await fetch(API_URL, {
             method: "POST",
@@ -215,7 +199,6 @@ async function sendMessage(msg, answerDiv){
         answerDiv.textContent = data.answer;
 
     } catch(err){
-        console.error("Backend error:", err);
         answerDiv.style.display = "block";
         answerDiv.textContent = "Backend not connected!";
     }
@@ -224,15 +207,11 @@ async function sendMessage(msg, answerDiv){
 // Render FAQs
 function renderFAQs(){
     questionDiv.innerHTML = "";
-    if(!activeCategory){
-        questionDiv.innerHTML = "<p style='text-align:center; color:#999;'>Select category 👆</p>";
-        return;
-    }
-    const filtered = faqs.filter(f => f.category === activeCategory);
-    filtered.forEach(item => {
-        const wrapper = document.createElement("div");
-        wrapper.className = "faq-item";
+    if(!activeCategory) return;
 
+    const filtered = faqs.filter(f => f.category === activeCategory);
+
+    filtered.forEach(item => {
         const q = document.createElement("div");
         q.className = "faq-question";
         q.textContent = item.question;
@@ -240,18 +219,15 @@ function renderFAQs(){
         const ans = document.createElement("div");
         ans.className = "faq-answer";
 
-        q.addEventListener("click", function(){
-            sendMessage(item.question, ans);
-        });
+        q.onclick = () => sendMessage(item.question, ans);
 
-        wrapper.appendChild(q);
-        wrapper.appendChild(ans);
-        questionDiv.appendChild(wrapper);
+        questionDiv.appendChild(q);
+        questionDiv.appendChild(ans);
     });
 }
 
-// Init
-renderFAQs();
-
 });
 </script>
+
+</body>
+</html>

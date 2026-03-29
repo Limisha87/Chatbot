@@ -4,4 +4,4 @@ description: >
   A simple Jekyll homepage.
 baseurl: "/Chatbot"
 url: "https://limisha87.github.io"
-theme: minima
+theme: null
