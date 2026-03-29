@@ -146,18 +146,63 @@ const categories = ["Diet","Fitness","Lifestyle","Nutrition","Veg","Non-Veg","To
 
 // FAQs
 const faqs = [
+
+  // DIET
   { category: "Diet", question: "What is diet plan?" },
   { category: "Diet", question: "How to lose weight?" },
   { category: "Diet", question: "How to gain weight?" },
-  { category: "Fitness", question: "Best exercise?" },
-  { category: "Lifestyle", question: "Healthy lifestyle?" },
-  { category: "Nutrition", question: "What are proteins?" },
-  { category: "Veg", question: "Veg protein sources?" },
-  { category: "Non-Veg", question: "Egg benefits?" },
-  { category: "Tools", question: "Track calories?" },
-  { category: "Help", question: "How to login?" }
-];
+  { category: "Diet", question: "What is balanced diet?" },
+  { category: "Diet", question: "Best diet for beginners?" },
 
+  // FITNESS
+  { category: "Fitness", question: "Best exercise?" },
+  { category: "Fitness", question: "Daily workout time?" },
+  { category: "Fitness", question: "Home workout?" },
+  { category: "Fitness", question: "Gym vs home?" },
+  { category: "Fitness", question: "Fitness challenge?" },
+
+  // LIFESTYLE
+  { category: "Lifestyle", question: "Healthy lifestyle?" },
+  { category: "Lifestyle", question: "Sleep importance?" },
+  { category: "Lifestyle", question: "Daily routine?" },
+  { category: "Lifestyle", question: "Stress control?" },
+  { category: "Lifestyle", question: "Screen time?" },
+
+  // NUTRITION
+  { category: "Nutrition", question: "What are proteins?" },
+  { category: "Nutrition", question: "What are carbohydrates?" },
+  { category: "Nutrition", question: "What are fats?" },
+  { category: "Nutrition", question: "What are vitamins?" },
+  { category: "Nutrition", question: "What are minerals?" },
+  { category: "Nutrition", question: "What is fiber?" },
+
+  // VEG
+  { category: "Veg", question: "Veg protein sources?" },
+  { category: "Veg", question: "Vegetarian diet plan?" },
+  { category: "Veg", question: "Veg breakfast?" },
+  { category: "Veg", question: "Veg lunch?" },
+  { category: "Veg", question: "Veg dinner?" },
+
+  // NON-VEG
+  { category: "Non-Veg", question: "Non-veg protein?" },
+  { category: "Non-Veg", question: "Egg benefits?" },
+  { category: "Non-Veg", question: "Chicken diet?" },
+  { category: "Non-Veg", question: "Fish benefits?" },
+  { category: "Non-Veg", question: "Dinner ideas?" },
+
+  // TOOLS
+  { category: "Tools", question: "Track water?" },
+  { category: "Tools", question: "Add meals?" },
+  { category: "Tools", question: "Track calories?" },
+  { category: "Tools", question: "BMI calculator?" },
+  { category: "Tools", question: "Progress tracking?" },
+
+  // HELP
+  { category: "Help", question: "How to login?" },
+  { category: "Help", question: "How to signup?" },
+  { category: "Help", question: "Forgot password?" }
+
+];
 // Render categories
 categories.forEach(cat => {
   const btn = document.createElement("button");
