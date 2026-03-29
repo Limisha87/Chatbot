@@ -11,6 +11,8 @@ title: Home
   <img src="/assets/icon.png" alt="chat">
 </div>
 
+const API_URL = "https://chatbot-backend.onrender.com/api/";
+
 <!-- CHAT CONTAINER -->
 <div id="chatBox" class="chat-container">
   <div class="chat-header">TrackIn-Take Bot</div>
