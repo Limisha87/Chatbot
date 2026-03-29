@@ -199,19 +199,23 @@ categories.forEach(cat => {
 });
 
 // Backend call
+const API_URL = "https://chatbot-3-3cn3.onrender.com/api/chat/";
+
 async function sendMessage(msg, answerDiv){
     if(!msg) return;
     try{
-        const response = await fetch("https://chatbot-3-3cn3.onrender.com/api/chat/", {
+        const response = await fetch(API_URL, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({message: msg})
         });
+
         const data = await response.json();
         answerDiv.style.display = "block";
         answerDiv.textContent = data.answer;
+
     } catch(err){
-        console.error("Backend not connected!", err);
+        console.error("Backend error:", err);
         answerDiv.style.display = "block";
         answerDiv.textContent = "Backend not connected!";
     }
