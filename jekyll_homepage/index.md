@@ -119,7 +119,7 @@ body {
 
 <!-- CHAT ICON -->
 <div id="chatIcon" class="chat-icon">
-  <img src="assets/icon.png" alt="chat">
+<img src="/Chatbot/assets/icon.png" alt="chat">
 </div>
 
 <!-- CHAT BOX -->
