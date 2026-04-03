@@ -3,8 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-import difflib
-import string
+from rest_framework.parsers import JSONParser
 
 # MENU DATA
 # ---------------------------
