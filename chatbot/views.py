@@ -120,37 +120,35 @@ NUTRITIONSECTIONS = {
 @method_decorator(csrf_exempt, name='dispatch')
 class ChatBotView(APIView):
 
-    # ✅ GET (optional - already working)
     def get(self, request):
-        role = request.GET.get("role")
+        return Response({"message": "Use POST method"})
 
-        if role == "user":
-            return Response(USERSECTIONS)
-        elif role == "nutritionist":
-            return Response(NUTRITIONSECTIONS)
-        else:
-            return Response({"error": "Invalid role"})
-
-    # ✅ ADD THIS (IMPORTANT)
     def post(self, request):
-        question = request.data.get("question", "").lower().strip()
+        try:
+            question = request.data.get("question", "").lower().strip()
 
-        # combine all FAQs
-        all_data = []
+            # combine all FAQs
+            all_data = []
 
-        for section in USERSECTIONS.values():
-            all_data.extend(section)
+            for section in USERSECTIONS.values():
+                all_data.extend(section)
 
-        for section in NUTRITIONSECTIONS.values():
-            all_data.extend(section)
+            for section in NUTRITIONSECTIONS.values():
+                all_data.extend(section)
 
-        # find answer
-        for item in all_data:
-            if item["q"].lower().strip() == question:
-                return Response({
-                    "answer": item["a"]
-                })
+            # find answer
+            for item in all_data:
+                if item["q"].lower().strip() == question:
+                    return Response({
+                        "answer": item["a"]
+                    })
 
-        return Response({
-            "answer": "Sorry, answer not found."
-        })
+            return Response({
+                "answer": "Answer not found"
+            })
+
+        except Exception as e:
+            return Response({
+                "answer": "Server error",
+                "error": str(e)
+            })
