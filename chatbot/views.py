@@ -6,89 +6,132 @@ from django.views.decorators.csrf import csrf_exempt
 import difflib
 import string
 
+# MENU DATA
 # ---------------------------
-# Questions and Answers
-# ---------------------------
-VALID_QUESTIONS = {
-    # Diet
-    "what is diet plan": "Diet plan helps manage daily nutrition.",
-    "how to lose weight": "Follow a calorie deficit diet.",
-    "how to gain weight": "Increase calorie intake gradually.",
-    "what is balanced diet": "Includes carbs, protein, fats, vitamins.",
-    "best diet for beginners": "Start with simple home-cooked meals.",
-
-    # Fitness
-    "best exercise": "Cardio + strength training.",
-    "daily workout time": "At least 30 minutes a day.",
-    "home workout": "Pushups, squats, yoga.",
-    "gym vs home": "Both are effective if consistent.",
-    "fitness challenge": "A plan to improve fitness over time.",
-
-    # Lifestyle
-    "healthy lifestyle": "Balanced diet + sleep + exercise.",
-    "sleep importance": "7-8 hours of sleep daily is recommended.",
-    "daily routine": "Wake up early and stay active.",
-    "stress control": "Meditation, exercise, and breaks help.",
-    "screen time": "Limit usage to avoid eye strain.",
-
-    # Nutrition
-    "what are proteins": "Help build muscles and repair tissues.",
-    "what are carbohydrates": "Provide energy for the body.",
-    "what are fats": "Energy storage and hormone regulation.",
-    "what are vitamins": "Boost immunity and overall health.",
-    "what are minerals": "Support body functions like bones and nerves.",
-    "what is fiber": "Improves digestion and gut health.",
-
-    # Veg
-    "veg protein sources": "Paneer, dal, soyabean, legumes.",
-    "vegetarian diet plan": "Include fruits, vegetables, grains, and protein.",
-    "veg breakfast": "Oats, fruits, milk, or yogurt.",
-    "veg lunch": "Roti, sabzi, dal, rice.",
-    "veg dinner": "Light khichdi or salad.",
-
-    # Non-Veg
-    "non-veg protein": "Chicken, eggs, fish.",
-    "egg benefits": "High protein and rich in nutrients.",
-    "chicken diet": "Lean protein source for muscle gain.",
-    "fish benefits": "Rich in Omega-3 fatty acids.",
-    "dinner ideas": "Grilled chicken or fish with veggies.",
-
-    # Tools
-    "track water": "Use a water tracker to log daily intake.",
-    "add meals": "Use the dashboard to log meals.",
-    "track calories": "Enter food details to monitor calories.",
-    "bmi calculator": "Enter height & weight to calculate BMI.",
-    "progress tracking": "Check reports to monitor progress.",
-
-    # Help
-    "how to login": "Click the login button and enter credentials.",
-    "how to signup": "Fill the signup form with required details.",
-    "forgot password": "Use the reset password option on login page."
+MENU_DATA = {
+    "About TrackIntake": "TrackIntake is an AI-powered nutrition and health tracking platform that helps you log your daily meals, monitor your nutrition, and receive personalized diet recommendations.",
+    "Data & Security": "Your data is safe, secure, and never shared without your permission.",
+    "Contact Us": "📞 7898622813"
 }
 
+# ---------------------------
+# USER FAQ
+# ---------------------------
+USERSECTIONS = {
+
+    "How to Use": [
+        {"q": "How do I start using TrackIntake?", "a": "Create an account, complete your profile, and start logging your meals."},
+        {"q": "What details are required first?", "a": "Enter age, weight, height, and your health goals."},
+        {"q": "Is it easy for beginners?", "a": "Yes, the platform is simple and user-friendly."},
+        {"q": "Do I need to use it daily?", "a": "Daily usage improves tracking accuracy."},
+        {"q": "Can I skip profile setup?", "a": "Yes, but completing profile gives better recommendations."}
+    ],
+
+    "Track Meals": [
+        {"q": "How do I log my meals?", "a": "Enter food items and calories will be calculated automatically."},
+        {"q": "Can I edit my meals later?", "a": "Yes, you can edit or delete entries anytime."},
+        {"q": "How are meals organized?", "a": "Meals are divided into breakfast, lunch, dinner, and snacks."},
+        {"q": "Does it support Indian food?", "a": "Yes, many Indian foods are supported."},
+        {"q": "Is there a food search option?", "a": "Search feature may be limited but improving."}
+    ],
+
+    "Diet Plans": [
+        {"q": "How do I get diet plans?", "a": "Plans are generated based on your profile."},
+        {"q": "Are diet plans personalized?", "a": "Yes, based on your data."},
+        {"q": "Can I follow plans without a nutritionist?", "a": "Yes, but expert advice helps."},
+        {"q": "Will veg preference be followed?", "a": "System tries to follow your preference."},
+        {"q": "Are diet plans accurate?", "a": "Based on standard nutrition data."}
+    ],
+
+    "Health Tracking": [
+        {"q": "What health tools are available?", "a": "BMI, water tracker, and weight tracking."},
+        {"q": "Can I track my BMI?", "a": "Yes, by entering height and weight."},
+        {"q": "Can I track water intake?", "a": "Yes, daily tracking available."},
+        {"q": "Can I track my weight?", "a": "Yes, monitor progress easily."},
+        {"q": "Is this platform suitable for diabetes or heart patients?", "a": "Yes, TrackIntake supports diabetes, heart health, and lifestyle conditions."}
+    ],
+
+    "My Progress": [
+        {"q": "Can I see my progress?", "a": "Yes, on dashboard."},
+        {"q": "What does dashboard show?", "a": "Calories, water intake, and weight summary."},
+        {"q": "Can I track long-term progress?", "a": "Yes, trends available."},
+        {"q": "Does it help motivation?", "a": "Yes, helps consistency."},
+        {"q": "Is progress tracking automatic?", "a": "Yes."}
+    ],
+
+    
+    "Help & Support": [
+        {"q": "Can I contact support?", "a": "Yes."},
+        {"q": "Can I consult nutritionist?", "a": "Yes."},
+        {"q": "What if I face issues?", "a": "Contact support."},
+        {"q": "Is help available anytime?", "a": "Depends on support."},
+        {"q": "Can I give feedback?", "a": "Yes."}
+    ]
+}
+
+# ---------------------------
+# NUTRITIONIST FAQ
+# ---------------------------
+NUTRITIONSECTIONS = {
+
+    "Patients": [
+        {"q": "Can I manage multiple patients?", "a": "Yes, manage multiple patients easily."},
+        {"q": "Can I monitor patients daily?", "a": "Yes, track daily progress."},
+        {"q": "Can I get new patients?", "a": "Yes, platform helps connect."},
+        {"q": "How to track progress?", "a": "Use dashboard reports."},
+        {"q": "Is patient data easy?", "a": "Yes, organized properly."}
+    ],
+
+    "Diet Plans": [
+        {"q": "How to create plans?", "a": "Use templates and AI suggestions."},
+        {"q": "Can I customize?", "a": "Yes."},
+        {"q": "Indian diet support?", "a": "Yes."},
+        {"q": "Reuse plans?", "a": "Yes."},
+        {"q": "AI help?", "a": "Yes."}
+    ],
+
+    "Consultations": [
+        {"q": "Online consultation?", "a": "Yes."},
+        {"q": "Easy communication?", "a": "Yes."},
+        {"q": "Schedule sessions?", "a": "Yes."},
+        {"q": "Follow-up support?", "a": "Yes."},
+        {"q": "Convenient?", "a": "Yes."}
+    ],
+
+    "Earnings": [
+        {"q": "How to earn?", "a": "Through services."},
+        {"q": "Multiple options?", "a": "Yes."},
+        {"q": "Set pricing?", "a": "Yes."},
+        {"q": "Grow practice?", "a": "Yes."},
+        {"q": "Track income?", "a": "Yes."}
+    ],
+
+    "Help & Support": [
+        {"q": "Facing issues?", "a": "Contact support."},
+        {"q": "Technical support?", "a": "Yes."},
+        {"q": "Demo available?", "a": "Yes."},
+        {"q": "Contact?", "a": "Email or support."},
+        {"q": "Feedback?", "a": "Yes."}
+    ]
+}
+
+# ---------------------------
+# API VIEW
+# ---------------------------
 @method_decorator(csrf_exempt, name='dispatch')
 class ChatBotView(APIView):
-    def post(self, request):
-        # Frontend se 'question' ya 'message' dono accept karenge
-        question = request.data.get("question") or request.data.get("message") or ""
-        original_question = question  # Save original for response
-        question = question.strip().lower()
-        # Remove punctuation
-        question = question.translate(str.maketrans("", "", string.punctuation))
 
-        # Normalize VALID_QUESTIONS
-        valid_normalized = {k.translate(str.maketrans("", "", string.punctuation)): v
-                            for k, v in VALID_QUESTIONS.items()}
+    def get(self, request):
+        role = request.GET.get("role")
 
-        # Exact match
-        answer = valid_normalized.get(question)
+        if role == "user":
+            return Response(USERSECTIONS)
+        elif role == "nutritionist":
+            return Response(NUTRITIONSECTIONS)
+        else:
+            return Response({"error": "Invalid role"})
 
-        # Fuzzy match if exact not found
-        if not answer:
-            matches = difflib.get_close_matches(question, valid_normalized.keys(), n=1, cutoff=0.6)
-            answer = valid_normalized.get(matches[0]) if matches else "Please ask a valid question."
 
-        return Response({
-            "question": original_question,
-            "answer": answer
-        })
+class MenuView(APIView):
+    def get(self, request):
+        return Response(MENU_DATA)
