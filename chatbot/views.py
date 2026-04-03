@@ -120,6 +120,8 @@ NUTRITIONSECTIONS = {
 # ---------------------------
 @method_decorator(csrf_exempt, name='dispatch')
 class ChatBotView(APIView):
+
+    # ✅ GET (optional - already working)
     def get(self, request):
         role = request.GET.get("role")
 
@@ -130,6 +132,26 @@ class ChatBotView(APIView):
         else:
             return Response({"error": "Invalid role"})
 
-class MenuView(APIView):
-    def get(self, request):
-        return Response(MENU_DATA)
+    # ✅ ADD THIS (IMPORTANT)
+    def post(self, request):
+        question = request.data.get("question", "").lower().strip()
+
+        # combine all FAQs
+        all_data = []
+
+        for section in USERSECTIONS.values():
+            all_data.extend(section)
+
+        for section in NUTRITIONSECTIONS.values():
+            all_data.extend(section)
+
+        # find answer
+        for item in all_data:
+            if item["q"].lower().strip() == question:
+                return Response({
+                    "answer": item["a"]
+                })
+
+        return Response({
+            "answer": "Sorry, answer not found."
+        })
