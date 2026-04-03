@@ -120,7 +120,6 @@ NUTRITIONSECTIONS = {
 # ---------------------------
 @method_decorator(csrf_exempt, name='dispatch')
 class ChatBotView(APIView):
-
     def get(self, request):
         role = request.GET.get("role")
 
@@ -130,7 +129,6 @@ class ChatBotView(APIView):
             return Response(NUTRITIONSECTIONS)
         else:
             return Response({"error": "Invalid role"})
-
 
 class MenuView(APIView):
     def get(self, request):
