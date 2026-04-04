@@ -70,11 +70,11 @@ body { margin:0; font-family:Arial; }
 .user { background:rgb(236, 132, 68); }
 .nutrition { background:rgb(236, 132, 68); }
 
-.btn:hover {
-  transform: scale(1.05);
-  opacity: 0.9;
-}
 
+.btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 15px rgba(249, 115, 22, 0.9);
+}
 .section-container {
   display: flex;
   flex-wrap: wrap;
@@ -85,6 +85,7 @@ body { margin:0; font-family:Arial; }
   text-align: center;
   
 }
+
 
 .section-btn {
   margin-top: 15px;
@@ -98,7 +99,7 @@ body { margin:0; font-family:Arial; }
   
   transition: 0.3s;
   text-align: center;
-  box-shadow: 0 3px 8px egba(0,0,0,0.2);
+  box-shadow: 0 4px 10px rgba(249, 115, 22, 0.6);
   transition: all 0.3s ease;
  
 }
@@ -125,14 +126,14 @@ body { margin:0; font-family:Arial; }
 }
 
 .answer {
-  display:none;
-  background:#313030;
-  color:white;
-  margin:5px;
-  padding:8px;
-  border-radius:10px;
+  display: none;
+  background: #f97316;   /* Orange */
+  color: white;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 10px;
   font-size: 15px;
-  transition: all 0.3s ease;;
+  transition: all 0.3s ease;
 }
 
 /* MENU */
@@ -246,7 +247,6 @@ const userFAQs = {
   "Health Tracking": [
     { q: "What health tools are available?"},
     { q: "Can I track my BMI?"},
-    { q: "Is BMI feature free?" },
     { q: "Can I track water intake?" },
     { q: "Can I track my weight?" },
     { q: "Is this platform suitable for diabetes or heart patients?"}
