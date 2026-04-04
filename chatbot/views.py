@@ -143,7 +143,7 @@ class ChatBotView(APIView):
 
             # find answer
             for item in all_data:
-                if item["q"].lower().strip() == question:
+               if item["q"].lower().strip() in question:
                     return Response({
                         "answer": item["a"]
                     })
