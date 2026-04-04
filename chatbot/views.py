@@ -5,6 +5,11 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 
+
+class MenuView(APIView):
+    def get(self, request):
+        return Response({"message": "Menu working"})
+    
 # MENU DATA
 # ---------------------------
 MENU_DATA = {

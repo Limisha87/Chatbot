@@ -52,7 +52,7 @@ MIDDLEWARE = [
 
 # settings.py
 CORS_ALLOWED_ORIGINS = [
-    "https://limisha87.github.io/chatbot_project/chatbot/"
+    "https://limisha87.github.io"
 ]
 CORS_ALLOW_CREDENTIALS = True
 
