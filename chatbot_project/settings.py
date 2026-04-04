@@ -52,9 +52,8 @@ MIDDLEWARE = [
 
 # settings.py
 CORS_ALLOWED_ORIGINS = [
-  " https://limisha87.github.io/Chatbot/"
+    "https://limisha87.github.io/chatbot_project/chatbot/"
 ]
-
 CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'chatbot_project.urls'
@@ -122,10 +121,10 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-DEBUG = False 
+DEBUG = True
 
 ALLOWED_HOSTS = [
-    "localhost",
+    "chatbot-3-3cn3.onrender.com",
     "127.0.0.1",
-    "https://chatbot-3-3cn3.onrender.com.onrender.com"
+    "localhost"
 ]
