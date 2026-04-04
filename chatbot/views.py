@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
+import re
 
 
 class MenuView(APIView):
@@ -122,6 +123,10 @@ NUTRITIONSECTIONS = {
 # ---------------------------
 # API VIEW
 # ---------------------------
+# chatbot/views.py
+
+
+
 @method_decorator(csrf_exempt, name='dispatch')
 class ChatBotView(APIView):
 
@@ -130,9 +135,11 @@ class ChatBotView(APIView):
 
     def post(self, request):
         try:
+            # 🔹 Clean user question
             question = request.data.get("question", "").lower().strip()
+            question = re.sub(r'[^\w\s]', '', question)  # remove punctuation
 
-            # combine all FAQs
+            # 🔹 Combine all FAQs
             all_data = []
 
             for section in USERSECTIONS.values():
@@ -141,15 +148,37 @@ class ChatBotView(APIView):
             for section in NUTRITIONSECTIONS.values():
                 all_data.extend(section)
 
-            # find answer
-            for item in all_data:
-               if item["q"].lower().strip() in question:
-                    return Response({
-                        "answer": item["a"]
-                    })
+            # 🔥 SMART MATCHING FUNCTION
+            def find_best_answer(question, data):
+                question_words = set(question.split())
+
+                best_match = None
+                max_score = 0
+
+                for item in data:
+                    q = item["q"].lower().strip()
+                    q = re.sub(r'[^\w\s]', '', q)
+
+                    q_words = set(q.split())
+
+                    # count matching words
+                    score = len(question_words & q_words)
+
+                    if score > max_score:
+                        max_score = score
+                        best_match = item
+
+                # 🔹 threshold (important)
+                if max_score >= 2:
+                    return best_match["a"]
+
+                return "Answer not found"
+
+            # 🔹 Get answer
+            answer = find_best_answer(question, all_data)
 
             return Response({
-                "answer": "Answer not found"
+                "answer": answer
             })
 
         except Exception as e:
