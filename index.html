@@ -395,7 +395,6 @@ function showQ(cat){
  document.getElementById("content").innerHTML=html;
 }
 
-
 async function getAnswer(el, i){
 
  let question = el.innerText;
@@ -403,6 +402,16 @@ async function getAnswer(el, i){
 
  if(ansEl.style.display === "block"){
    ansEl.style.display = "none";
+   return;
+ }
+
+ // 🔥 loading
+ ansEl.innerText = "⏳ Loading...";
+ ansEl.style.display = "block";
+
+ // 🔥 cache check
+ if(cache[question]){
+   ansEl.innerText = cache[question];
    return;
  }
 
@@ -419,6 +428,9 @@ async function getAnswer(el, i){
 
    let data = await res.json();
 
+   // 🔥 save cache
+   cache[question] = data.answer;
+
    document.querySelectorAll(".answer").forEach(a=>{
      a.style.display="none";
    });
@@ -430,7 +442,6 @@ async function getAnswer(el, i){
    ansEl.innerText = "⚠️ Server error";
    ansEl.style.display = "block";
  }
-
 }
 
 /* SECTION */
