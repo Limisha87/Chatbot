@@ -416,15 +416,19 @@ async function getAnswer(el, i){
  }
 
  try {
-   let res = await fetch("https://chatbot-3-3cn3.onrender.com/api/chat/", {
-     method: "POST",
-     headers: {
-       "Content-Type": "application/json"
-     },
-     body: JSON.stringify({
-       question: question
-     })
-   });
+  const controller = new AbortController();
+const timeout = setTimeout(() => controller.abort(), 5000);
+
+let res = await fetch("https://chatbot-3-3cn3.onrender.com/api/chat/", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({ question: question }),
+  signal: controller.signal
+});
+
+clearTimeout(timeout);
 
    let data = await res.json();
 
