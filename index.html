@@ -76,10 +76,15 @@ body { margin:0; font-family:Arial; }
   box-shadow: 0 4px 10px rgba(249, 115, 22, 0.3);
   transition: all 0.3s ease;
 }
+.user {
+  background: #fed7aa;   /* light orange */
+  color: #c2410c;        /* dark orange */
+}
 
-.user { background:rgb(236, 132, 68); }
-.nutrition { background:rgb(236, 132, 68); }
-
+.nutrition {
+  background: #fde68a;   /* light yellow-orange */
+  color: #92400e;        /* dark brown-orange */
+}
 
 .btn:hover {
   background: #fdba74;   /* thoda dark orange */
@@ -361,9 +366,16 @@ function showHome(){
 
 /* BACK */
 function goBack(){
- if(historyStack.length>0){
-   document.getElementById("content").innerHTML = historyStack.pop();
- }
+
+  // 🔴 menu close karo
+  menuOpen = false;
+  activeMenu = null;
+  document.getElementById("menuPanel").style.display = "none";
+
+  // 🔵 previous page
+  if(historyStack.length > 0){
+    document.getElementById("content").innerHTML = historyStack.pop();
+  }
 }
 
 /* HOME */
@@ -423,19 +435,27 @@ async function getAnswer(el, i){
 
 /* SECTION */
 function openSection(type){
- historyStack.push(document.getElementById("content").innerHTML);
+  historyStack.push(document.getElementById("content").innerHTML);
 
- activeData = (type==="user") ? userFAQs : nutritionistFAQs;
-let title = (type === "user") ? "👤 User Page" : "🥗 Nutritionist Page";
-let html = `<div class="section-container">`;
+  activeData = (type==="user") ? userFAQs : nutritionistFAQs;
 
-for(let cat in activeData){
-  html += `<button class="section-btn" onclick="showQ('${cat}')">${cat}</button>`;
-}
+  let title = (type === "user") ? "👤 User Page" : "🥗 Nutritionist Page";
 
-html += `</div>`;
+  let html = `
+    <div style="text-align:center; padding:10px;">
+      <h3 style="color:#f97316;">${title}</h3>
+    </div>
 
- document.getElementById("content").innerHTML=html;
+    <div class="section-container">
+  `;
+
+  for(let cat in activeData){
+    html += `<button class="section-btn" onclick="showQ('${cat}')">${cat}</button>`;
+  }
+
+  html += `</div>`;
+
+  document.getElementById("content").innerHTML = html;
 }
 
 
