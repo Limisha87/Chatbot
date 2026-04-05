@@ -57,24 +57,36 @@ body { margin:0; font-family:Arial; }
 }
 
 /* BUTTON */
-.btn-group { display:flex; justify-content:center; gap:15px; }
-.btn {
-  border:none;
-  padding:8px 17px;
-  border-radius:20px;
-  color:white;
-  cursor:pointer;
-  gap: 10px;
-  
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 15px;
 }
+.btn {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+
+  background: #fed7aa;     /* Light orange */
+  color: #c2410c;          /* Dark orange text */
+
+  box-shadow: 0 4px 10px rgba(249, 115, 22, 0.3);
+  transition: all 0.3s ease;
+}
+
 .user { background:rgb(236, 132, 68); }
 .nutrition { background:rgb(236, 132, 68); }
 
 
 .btn:hover {
+  background: #fdba74;   /* thoda dark orange */
   transform: scale(1.08);
-  box-shadow: 0 6px 15px rgba(249, 115, 22, 0.9);
+  box-shadow: 0 6px 15px rgba(249, 115, 22, 0.6);
 }
+
 .section-container {
   display: flex;
   flex-wrap: wrap;
@@ -213,8 +225,8 @@ let activeData = null;
 
 /* MENU DATA */
 const menuData = {
-  "About TrackIntake": "TrackIntake helps track meals.",
-  "Data & Security": "Your data is safe.",
+  "About TrackIntake": "TrackIntake is an AI-powered nutrition and health tracking platform that helps you log your daily meals, monitor your nutrition, and receive personalized diet recommendations.",
+  "Data & Security": "Your data is safe, secure, and never shared without your permission.",
   "Contact Us": "📞 7898622813"
 };
 
@@ -335,7 +347,6 @@ function openBot(){
  document.getElementById("chatBox").style.display="flex";
  showHome();
 }
-
 function showHome(){
   historyStack = [];
 
@@ -344,8 +355,10 @@ function showHome(){
       <h3>Welcome To TrackIn-Take 👋</h3>
       <h5>Please Choose a category</h5>
 
-      <button class="btn user" onclick="openSection('user')">User</button>
-      <button class="btn nutrition" onclick="openSection('nutrition')">Nutritionist</button>
+      <div class="btn-group">
+        <button class="btn user" onclick="openSection('user')">User</button>
+        <button class="btn nutrition" onclick="openSection('nutrition')">Nutritionist</button>
+      </div>
     </div>
   `;
 }
@@ -417,11 +430,17 @@ function openSection(type){
  historyStack.push(document.getElementById("content").innerHTML);
 
  activeData = (type==="user") ? userFAQs : nutritionistFAQs;
+let title = (type === "user") ? "👤 User Page" : "🥗 Nutritionist Page";
 
- let html="";
- for(let cat in activeData){
-   html+=`<button class="section-btn" onclick="showQ('${cat}')">${cat}</button>`;
- }
+let html = `
+  <div style="text-align:center; padding:10px;">
+    <h3 style="color:#f97316;">${title}</h3>
+  </div>
+`;
+
+for(let cat in activeData){
+  html += `<button class="section-btn" onclick="showQ('${cat}')">${cat}</button>`;
+}
 
  document.getElementById("content").innerHTML=html;
 }

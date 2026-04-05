@@ -24,100 +24,112 @@ MENU_DATA = {
 # ---------------------------
 USERSECTIONS = {
 
-    "How to Use": [
-        {"q": "How do I start using TrackIntake?", "a": "Create an account, complete your profile, and start logging your meals."},
-        {"q": "What details are required first?", "a": "Enter age, weight, height, and your health goals."},
-        {"q": "Is it easy for beginners?", "a": "Yes, the platform is simple and user-friendly."},
-        {"q": "Do I need to use it daily?", "a": "Daily usage improves tracking accuracy."},
-        {"q": "Can I skip profile setup?", "a": "Yes, but completing profile gives better recommendations."}
-    ],
+  "How to Use": [
+    { "q": "How do I start using TrackIntake?", "a": "Create an account, complete your profile, and start logging your meals." },
+    { "q": "What details are required first?", "a": "You need to enter basic details like age, weight, height, and your health goals." },
+    { "q": "Is it easy for beginners?", "a": "Yes, the platform is simple and designed for all users." },
+    { "q": "Do I need to use it daily?", "a": "Daily usage helps in better tracking and accurate results." },
+    { "q": "Can I skip profile setup?", "a": "Yes, but completing your profile gives better recommendations." }
+  ],
 
-    "Track Meals": [
-        {"q": "How do I log my meals?", "a": "Enter food items and calories will be calculated automatically."},
-        {"q": "Can I edit my meals later?", "a": "Yes, you can edit or delete entries anytime."},
-        {"q": "How are meals organized?", "a": "Meals are divided into breakfast, lunch, dinner, and snacks."},
-        {"q": "Does it support Indian food?", "a": "Yes, many Indian foods are supported."},
-        {"q": "Is there a food search option?", "a": "Search feature may be limited but improving."}
-    ],
+  "Track Meals": [
+    { "q": "How do I log my meals?", "a": "You can type your food items and the system will calculate calories automatically." },
+    { "q": "Can I edit my meals later?", "a": "Yes, you can edit or delete your meal entries anytime." },
+    { "q": "How are meals organized?", "a": "Meals are divided into breakfast, lunch, dinner, and snacks." },
+    { "q": "Does it support Indian food?", "a": "Yes, it includes a variety of Indian food items." },
+    { "q": "Is there a food search option?", "a": "Search options may be limited but can be improved in future updates." }
+  ],
 
-    "Diet Plans": [
-        {"q": "How do I get diet plans?", "a": "Plans are generated based on your profile."},
-        {"q": "Are diet plans personalized?", "a": "Yes, based on your data."},
-        {"q": "Can I follow plans without a nutritionist?", "a": "Yes, but expert advice helps."},
-        {"q": "Will veg preference be followed?", "a": "System tries to follow your preference."},
-        {"q": "Are diet plans accurate?", "a": "Based on standard nutrition data."}
-    ],
+  "Diet Plans": [
+    { "q": "How do I get diet plans?", "a": "Diet plans are generated based on your profile and health goals." },
+    { "q": "Are diet plans personalized?", "a": "Yes, plans are customized according to your data." },
+    { "q": "Can I follow plans without a nutritionist?", "a": "Yes, but expert advice can improve results." },
+    { "q": "Will veg preference be followed?", "a": "The system tries to follow your preference, but improvements may be needed." },
+    { "q": "Are diet plans accurate?", "a": "They are based on standard nutrition data." }
+  ],
 
-    "Health Tracking": [
-        {"q": "What health tools are available?", "a": "BMI, water tracker, and weight tracking."},
-        {"q": "Can I track my BMI?", "a": "Yes, by entering height and weight."},
-        {"q": "Can I track water intake?", "a": "Yes, daily tracking available."},
-        {"q": "Can I track my weight?", "a": "Yes, monitor progress easily."},
-        {"q": "Is this platform suitable for diabetes or heart patients?", "a": "Yes, TrackIntake supports diabetes, heart health, and lifestyle conditions."}
-    ],
+  "Health Tracking": [
+    { "q": "What health tools are available?", "a": "BMI calculator, water tracker, and weight tracker are available." },
+    { "q": "Can I track my BMI?", "a": "Yes, you can calculate BMI by entering your height and weight." },
+    { "q": "Is BMI feature free?", "a": "Basic BMI results are free, advanced insights may require premium." },
+    { "q": "Can I track water intake?", "a": "Yes, you can monitor your daily water intake." },
+    { "q": "Can I track my weight?", "a": "Yes, weight tracking helps you monitor progress over time." },
+    { "q": "Is this platform suitable for diabetes or heart patients?", "a": "Yes, TrackIntake supports diabetes management, heart health, weight loss, and other lifestyle conditions." }
+  ],
 
-    "My Progress": [
-        {"q": "Can I see my progress?", "a": "Yes, on dashboard."},
-        {"q": "What does dashboard show?", "a": "Calories, water intake, and weight summary."},
-        {"q": "Can I track long-term progress?", "a": "Yes, trends available."},
-        {"q": "Does it help motivation?", "a": "Yes, helps consistency."},
-        {"q": "Is progress tracking automatic?", "a": "Yes."}
-    ],
+  "My Progress": [
+    { "q": "Can I see my progress?", "a": "Yes, your progress is shown on the dashboard." },
+    { "q": "What does the dashboard show?", "a": "It shows calories, water intake, and weight summary." },
+    { "q": "Can I track long-term progress?", "a": "Yes, you can view trends over time." },
+    { "q": "Does it help with motivation?", "a": "Yes, tracking progress helps you stay consistent." },
+    { "q": "Is progress tracking automatic?", "a": "Yes, it updates based on your logged data." }
+  ],
 
-    
-    "Help & Support": [
-        {"q": "Can I contact support?", "a": "Yes."},
-        {"q": "Can I consult nutritionist?", "a": "Yes."},
-        {"q": "What if I face issues?", "a": "Contact support."},
-        {"q": "Is help available anytime?", "a": "Depends on support."},
-        {"q": "Can I give feedback?", "a": "Yes."}
-    ]
-}
+  
+  "Help & Support": [
+    { "q": "Can I contact support?", "a": "Yes, support is available for help." },
+    { "q": "Can I consult a nutritionist?", "a": "Yes, you can connect with a nutritionist." },
+    { "q": "What should I do if I face issues?", "a": "You can contact the support team." },
+    { "q": "Is help available anytime?", "a": "Support availability may vary." },
+    { "q": "Can I give feedback?", "a": "Yes, your feedback helps improve the platform." }
+  ],
 
-# ---------------------------
-# NUTRITIONIST FAQ
-# ---------------------------
-NUTRITIONSECTIONS = {
+   "How to Use": [
+    { "q": "How do I start using TrackIntake as a nutritionist?", "a": "Register on the platform, complete your professional profile, and start using the features." },
+    { "q": "What details are required during setup?", "a": "You need to enter your professional details like experience, specialization, and profile information." },
+    { "q": "Is the platform easy to use?", "a": "Yes, it is designed to be simple and user-friendly." },
+    { "q": "Do I need training before using it?", "a": "Basic onboarding or demo support is available to help you understand the platform." },
+    { "q": "Can I start working immediately?", "a": "Yes, once your profile is complete, you can start managing patients and creating diet plans." }
+  ],
 
-    "Patients": [
-        {"q": "Can I manage multiple patients?", "a": "Yes, manage multiple patients easily."},
-        {"q": "Can I monitor patients daily?", "a": "Yes, track daily progress."},
-        {"q": "Can I get new patients?", "a": "Yes, platform helps connect."},
-        {"q": "How to track progress?", "a": "Use dashboard reports."},
-        {"q": "Is patient data easy?", "a": "Yes, organized properly."}
-    ],
+  "Patients": [
+    { "q": "Can I manage multiple patients?", "a": "Yes, you can manage multiple patients from one dashboard depending on your plan." },
+    { "q": "Can I monitor patients daily?", "a": "Yes, you can track daily meals, calorie intake, and health progress." },
+    { "q": "Can I get new patients through the platform?", "a": "Yes, the platform helps you connect with new patients." },
+    { "q": "How can I track patient progress?", "a": "You can view meal logs, reports, and progress data from your dashboard." },
+    { "q": "Is patient data easy to access?", "a": "Yes, all patient information is organized and easy to access." }
+  ],
 
-    "Diet Plans": [
-        {"q": "How to create plans?", "a": "Use templates and AI suggestions."},
-        {"q": "Can I customize?", "a": "Yes."},
-        {"q": "Indian diet support?", "a": "Yes."},
-        {"q": "Reuse plans?", "a": "Yes."},
-        {"q": "AI help?", "a": "Yes."}
-    ],
+  "Diet Plans": [
+    { "q": "How do I create diet plans?", "a": "You can create plans using templates, food database, and AI suggestions." },
+    { "q": "Can I customize diet plans?", "a": "Yes, diet plans can be fully customized based on patient needs." },
+    { "q": "Does the system support Indian diets?", "a": "Yes, it includes a wide range of Indian food options." },
+    { "q": "Can I reuse diet plans?", "a": "Yes, you can reuse and modify plans for different patients." },
+    { "q": "Does AI help in diet planning?", "a": "Yes, AI provides suggestions to make planning faster and easier." }
+  ],
 
-    "Consultations": [
-        {"q": "Online consultation?", "a": "Yes."},
-        {"q": "Easy communication?", "a": "Yes."},
-        {"q": "Schedule sessions?", "a": "Yes."},
-        {"q": "Follow-up support?", "a": "Yes."},
-        {"q": "Convenient?", "a": "Yes."}
-    ],
+  "Consultations": [
+    { "q": "Can I conduct online consultations?", "a": "Yes, you can provide online consultations and follow-ups." },
+    { "q": "Can I communicate with patients easily?", "a": "Yes, the platform allows easy communication with patients." },
+    { "q": "Can I schedule consultations?", "a": "Yes, you can manage and schedule your sessions." },
+    { "q": "Is follow-up support available?", "a": "Yes, you can provide continuous follow-up support." },
+    { "q": "Is it convenient for both sides?", "a": "Yes, it is flexible and convenient for both nutritionists and patients." }
+  ],
 
-    "Earnings": [
-        {"q": "How to earn?", "a": "Through services."},
-        {"q": "Multiple options?", "a": "Yes."},
-        {"q": "Set pricing?", "a": "Yes."},
-        {"q": "Grow practice?", "a": "Yes."},
-        {"q": "Track income?", "a": "Yes."}
-    ],
+  "Earnings": [
+    { "q": "How can I earn through TrackIntake?", "a": "You can earn through consultations, diet plans, and subscription services." },
+    { "q": "Are there multiple earning options?", "a": "Yes, you can offer different services to generate income." },
+    { "q": "Can I set my own pricing?", "a": "In most cases, you can customize pricing based on your services." },
+    { "q": "Can this help grow my practice?", "a": "Yes, it helps you reach more clients and expand your work." },
+    { "q": "Can I track my earnings?", "a": "Yes, you can monitor your income and transactions." }
+  ],
 
-    "Help & Support": [
-        {"q": "Facing issues?", "a": "Contact support."},
-        {"q": "Technical support?", "a": "Yes."},
-        {"q": "Demo available?", "a": "Yes."},
-        {"q": "Contact?", "a": "Email or support."},
-        {"q": "Feedback?", "a": "Yes."}
-    ]
+  "Reports": [
+    { "q": "Can I generate patient reports?", "a": "Yes, you can generate detailed reports for each patient." },
+    { "q": "What insights are available?", "a": "You get insights on nutrition, calories, and health progress." },
+    { "q": "Can I track long-term progress?", "a": "Yes, long-term tracking is available." },
+    { "q": "Are reports easy to understand?", "a": "Yes, reports are simple and clear." },
+    { "q": "Can I use data for research?", "a": "Yes, data can be useful for research and case studies." }
+  ],
+
+  "Help & Support": [
+    { "q": "What should I do if I face issues?", "a": "You can contact the support team for help." },
+    { "q": "Is technical support available?", "a": "Yes, support is available for technical issues." },
+    { "q": "Can I request a demo?", "a": "Yes, demo sessions can help you understand features better." },
+    { "q": "How can I contact support?", "a": "You can use email or contact options provided on the platform." },
+    { "q": "Can I give feedback?", "a": "Yes, your feedback helps improve the platform." }
+  ]
+
 }
 
 # ---------------------------
