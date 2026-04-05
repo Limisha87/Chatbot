@@ -72,7 +72,10 @@ USERSECTIONS = {
     { "q": "What should I do if I face issues?", "a": "You can contact the support team." },
     { "q": "Is help available anytime?", "a": "Support availability may vary." },
     { "q": "Can I give feedback?", "a": "Yes, your feedback helps improve the platform." }
-  ],
+  ]
+}
+
+NUTRITIONSECTIONS = {
 
    "How to Use": [
     { "q": "How do I start using TrackIntake as a nutritionist?", "a": "Register on the platform, complete your professional profile, and start using the features." },
@@ -129,8 +132,9 @@ USERSECTIONS = {
     { "q": "How can I contact support?", "a": "You can use email or contact options provided on the platform." },
     { "q": "Can I give feedback?", "a": "Yes, your feedback helps improve the platform." }
   ]
+  
+  }
 
-}
 
 # ---------------------------
 # API VIEW
@@ -156,9 +160,10 @@ class ChatBotView(APIView):
 
             for section in USERSECTIONS.values():
                 all_data.extend(section)
-
+                
             for section in NUTRITIONSECTIONS.values():
                 all_data.extend(section)
+
 
             # 🔥 SMART MATCHING FUNCTION
             def find_best_answer(question, data):
