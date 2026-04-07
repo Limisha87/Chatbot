@@ -52,7 +52,8 @@ MIDDLEWARE = [
 
 # settings.py
 CORS_ALLOWED_ORIGINS = [
-    "https://limisha87.github.io"
+    "https://limisha87.github.io",
+     "https://chatbot-4-az4c.onrender.com"
 ]
 CORS_ALLOW_CREDENTIALS = True
 
