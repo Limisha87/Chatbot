@@ -1,183 +1,131 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html> <!-- HTML5 document declare karta hai -->
+<html lang="en"> <!-- Language English set -->
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TrackIn-Take Bot</title>
+<meta charset="UTF-8"> <!-- Character encoding UTF-8 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive design ke liye -->
+
+<title>TrackIn-Take Bot</title> <!-- Page title -->
+
+<!-- External CSS file link -->
 <link rel="stylesheet" href="assets/styles.css">
 </head>
+
 <body>
 
+<!-- ================= CHAT ICON ================= -->
+<!-- Floating chatbot icon (bottom-right) -->
 <div class="chatbot-logo" id="chatIcon">
-  <img src="assets/icon.png" alt="chatbot">
+  <img src="assets/icon.png" alt="chatbot"> <!-- Chatbot image -->
 </div>
 
+<!-- ================= CHATBOX ================= -->
+<!-- Main chatbot container -->
 <div id="chatBox" class="chatbot-container">
 
+  <!-- HEADER SECTION -->
   <div class="header">
+
+    <!-- Back button -->
     <span onclick="goBack()">←</span>
+
+    <!-- Chatbot title -->
     <span>TrackIn-Take Bot</span>
+
+    <!-- Menu button -->
     <span onclick="toggleMenu()">☰</span>
+
   </div>
 
+  <!-- Menu panel (hidden initially) -->
   <div id="menuPanel" class="menu-panel"></div>
+
+  <!-- Dynamic content area -->
   <div id="content"></div>
 
 </div>
 
 <script>
+
+// PAGE LOAD 
+
+// Jab page load hota hai tab ye function run hota hai
 window.onload = function(){
 
+  // Chat icon select karo
   const icon = document.getElementById("chatIcon");
 
+  // Click event add karo
   icon.onclick = function(){
-    openBot();
+    openBot(); // Bot open karega
   };
 
 };
 
+//CLOSE BOT 
+
+// Chatbot close karne ka function
 function closeBot(){
-  document.getElementById("chatBox").style.display = "none";
+  document.getElementById("chatBox").style.display = "none"; // Hide chatbot
 }
 
-/* HISTORY */
-let historyStack = [];
-let activeData = null;
+//GLOBAL VARIABLES
 
-let cache = {};
+let historyStack = []; // Previous pages store karne ke liye (back button)
+let activeData = null; // Current selected data (user ya nutrition)
+let cache = {}; // API response cache (fast response ke liye)
 
-/* MENU DATA */
+//MENU DATA 
+
+// Menu ke options aur unke content
 const menuData = {
-  "About TrackIntake": "TrackIntake is an AI-powered nutrition and health tracking platform that helps you log your daily meals, monitor your nutrition, and receive personalized diet recommendations.",
-  "Data & Security": "Your data is safe, secure, and never shared without your permission.",
+  "About TrackIntake": "TrackIntake is an AI-powered nutrition platform.",
+  "Data & Security": "Your data is safe and secure.",
   "Contact Us": "📞 7898622813"
 };
 
-/* FAQ DATA */
+//USER FAQ 
+
+// User related questions
 const userFAQs = {
   "How to Use": [
     { q: "How do I start using TrackIntake?" },
-    { q: "What details are required first?"},
-    { q: "Is it easy for beginners?"},
-    { q: "Do I need to use it daily?"},
-    { q: "Can I skip profile setup?" }
-  ],
-
-  "Track Meals": [
-    { q: "How do I log my meals?" },
-    { q: "Can I edit my meals later?"},
-    { q: "How are meals organized?"},
-    { q: "Does it support Indian food?"},
-    { q: "Is there a food search option?" }
-  ],
-
-  "Diet Plans": [
-    { q: "How do I get diet plans?" },
-    { q: "Are diet plans personalized?" },
-    { q: "Can I follow plans without a nutritionist?"},
-    { q: "Will veg preference be followed?" },
-    { q: "Are diet plans accurate?" }
-  ],
-
-  "Health Tracking": [
-    { q: "What health tools are available?"},
-    { q: "Can I track my BMI?"},
-    { q: "Can I track water intake?" },
-    { q: "Can I track my weight?" },
-    { q: "Is this platform suitable for diabetes or heart patients?"}
-  ],
-
-  "My Progress": [
-    { q: "Can I see my progress?" },
-    { q: "What does the dashboard show?" },
-    { q: "Can I track long-term progress?" },
-    { q: "Does it help with motivation?" },
-    { q: "Is progress tracking automatic?" }
-  ],
-
-  
-
-  "Help & Support": [
-    { q: "Can I contact support?" },
-    { q: "Can I consult a nutritionist?" },
-    { q: "What should I do if I face issues?"},
-    { q: "Is help available anytime?" },
-    { q: "Can I give feedback?" }
+    { q: "What details are required first?" }
   ]
-
 };
 
+//NUTRITIONIST FAQ 
+
+// Nutritionist related questions
 const nutritionistFAQs = {
-   "How to Use": [
-    { q: "How do I start using TrackIntake as a nutritionist?"},
-    { q: "What details are required during setup?", },
-    { q: "Is the platform easy to use?" },
-    { q: "Do I need training before using it?" },
-    { q: "Can I start working immediately?"}
-  ],
-
   "Patients": [
-    { q: "Can I manage multiple patients?"},
-    { q: "Can I monitor patients daily?"},
-    { q: "Can I get new patients through the platform?"},
-    { q: "How can I track patient progress?" },
-    { q: "Is patient data easy to access?"}
-  ],
-
-  "Diet Plans": [
-    { q: "How do I create diet plans?"},
-    { q: "Can I customize diet plans?" },
-    { q: "Does the system support Indian diets?" },
-    { q: "Can I reuse diet plans?"},
-    { q: "Does AI help in diet planning?"}
-  ],
-
-  "Consultations": [
-    { q: "Can I conduct online consultations?"},
-    { q: "Can I communicate with patients easily?" },
-    { q: "Can I schedule consultations?" },
-    { q: "Is follow-up support available?" },
-    { q: "Is it convenient for both sides?"}
-  ],
-
-  "Earnings": [
-    { q: "How can I earn through TrackIntake?" },
-    { q: "Are there multiple earning options?"},
-    { q: "Can I set my own pricing?" },
-    { q: "Can this help grow my practice?"},
-    { q: "Can I track my earnings?" }
-  ],
-
-  "Reports": [
-    { q: "Can I generate patient reports?"},
-    { q: "What insights are available?"},
-    { q: "Can I track long-term progress?"},
-    { q: "Are reports easy to understand?"},
-    { q: "Can I use data for research?"}
-  ],
-
-  "Help & Support": [
-    { q: "What should I do if I face issues?"},
-    { q: "Is technical support available?"},
-    { q: "Can I request a demo?"},
-    { q: "How can I contact support?"},
-    { q: "Can I give feedback?"}
+    { q: "Can I manage multiple patients?" },
+    { q: "Can I monitor patients daily?" }
   ]
-
 };
-/* OPEN BOT */
-function openBot(){
- document.getElementById("chatBox").style.display="flex";
- showHome();
-}
-function showHome(){
-  historyStack = [];
 
+//OPEN BOT
+
+// Chatbot open karne ka function
+function openBot(){
+  document.getElementById("chatBox").style.display = "flex"; // Show chatbot
+  showHome(); // Home screen load karo
+}
+
+//HOME SCREEN
+
+// Initial screen show karta hai
+function showHome(){
+
+  historyStack = []; // History reset
+
+  // HTML inject karna
   document.getElementById("content").innerHTML = `
     <div style="text-align:center;padding:20px;">
       <h3>Welcome To TrackIn-Take 👋</h3>
       <h5>Please Choose a category</h5>
 
+      <!-- Buttons -->
       <div class="btn-group">
         <button class="btn user" onclick="openSection('user')">User</button>
         <button class="btn nutrition" onclick="openSection('nutrition')">Nutritionist</button>
@@ -186,96 +134,119 @@ function showHome(){
   `;
 }
 
-/* BACK */
+// BACK BUTTON
+
+// Back navigation
 function goBack(){
 
-  // 🔴 menu close karo
+  // Menu close karna
   menuOpen = false;
   activeMenu = null;
   document.getElementById("menuPanel").style.display = "none";
 
-  // 🔵 previous page
+  // Previous page load karna
   if(historyStack.length > 0){
     document.getElementById("content").innerHTML = historyStack.pop();
   }
 }
 
-/* HOME */
+//SHOW QUESTIONS 
+
+// Category ke questions show karna
 function showQ(cat){
- historyStack.push(document.getElementById("content").innerHTML);
 
- let faqs = activeData[cat];
- let html="";
-
- faqs.forEach((item,i)=>{
-   html+=`
-   <div class="question" onclick="getAnswer(this, ${i})">${item.q}</div>
-   <div class="answer" id="ans${i}"></div>
-   `;
- });
-
- document.getElementById("content").innerHTML=html;
-}
-
-async function getAnswer(el, i){
-
- let question = el.innerText;
- let ansEl = document.getElementById("ans"+i);
-
- if(ansEl.style.display === "block"){
-   ansEl.style.display = "none";
-   return;
- }
-
- // 🔥 loading
- ansEl.innerText = "⏳ Loading...";
- ansEl.style.display = "block";
-
- // 🔥 cache check
- if(cache[question]){
-   ansEl.innerText = cache[question];
-   return;
- }
-
- try {
-  const controller = new AbortController();
-const timeout = setTimeout(() => controller.abort(), 5000);
-
-let res = await fetch("https://chatbot-3-3cn3.onrender.com/api/chat/", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({ question: question }),
-  signal: controller.signal
-});
-
-clearTimeout(timeout);
-
-   let data = await res.json();
-
-   // 🔥 save cache
-   cache[question] = data.answer;
-
-   document.querySelectorAll(".answer").forEach(a=>{
-     a.style.display="none";
-   });
-
-   ansEl.innerText = data.answer;
-   ansEl.style.display = "block";
-
- } catch(err){
-   ansEl.innerText = "⚠️ Server error";
-   ansEl.style.display = "block";
- }
-}
-
-/* SECTION */
-function openSection(type){
+  // Current page save
   historyStack.push(document.getElementById("content").innerHTML);
 
+  let faqs = activeData[cat]; // Selected category data
+  let html = ""; // HTML string
+
+  // Loop through questions
+  faqs.forEach((item,i)=>{
+    html += `
+      <div class="question" onclick="getAnswer(this, ${i})">${item.q}</div>
+      <div class="answer" id="ans${i}"></div>
+    `;
+  });
+
+  // Inject HTML
+  document.getElementById("content").innerHTML = html;
+}
+
+// GET ANSWER 
+
+// API se answer lena
+async function getAnswer(el, i){
+
+  let question = el.innerText; // Question text
+  let ansEl = document.getElementById("ans"+i); // Answer element
+
+  // Toggle hide/show
+  if(ansEl.style.display === "block"){
+    ansEl.style.display = "none";
+    return;
+  }
+
+  // Loading show karna
+  ansEl.innerText = "⏳ Loading...";
+  ansEl.style.display = "block";
+
+  // Cache check
+  if(cache[question]){
+    ansEl.innerText = cache[question];
+    return;
+  }
+
+  try {
+
+    // Timeout setup
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 5000);
+
+    // API request
+    let res = await fetch("https://chatbot-3-3cn3.onrender.com/api/chat/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ question: question }),
+      signal: controller.signal
+    });
+
+    clearTimeout(timeout); // Timeout clear
+
+    let data = await res.json(); // JSON response
+
+    cache[question] = data.answer; // Cache save
+
+    // Hide all answers
+    document.querySelectorAll(".answer").forEach(a=>{
+      a.style.display="none";
+    });
+
+    // Show current answer
+    ansEl.innerText = data.answer;
+    ansEl.style.display = "block";
+
+  } catch(err){
+
+    // Error handling
+    ansEl.innerText = "⚠️ Server error";
+    ansEl.style.display = "block";
+  }
+}
+
+//OPEN SECTION 
+
+// User ya Nutritionist select karna
+function openSection(type){
+
+  historyStack.push(document.getElementById("content").innerHTML);
+
+  // Data assign
   activeData = (type==="user") ? userFAQs : nutritionistFAQs;
 
+  // Title set
   let title = (type === "user") ? "👤 User Page" : "🥗 Nutritionist Page";
 
   let html = `
@@ -286,6 +257,7 @@ function openSection(type){
     <div class="section-container">
   `;
 
+  // Categories loop
   for(let cat in activeData){
     html += `<button class="section-btn" onclick="showQ('${cat}')">${cat}</button>`;
   }
@@ -295,49 +267,55 @@ function openSection(type){
   document.getElementById("content").innerHTML = html;
 }
 
+///MENU
 
-/* MENU */
-let menuOpen=false, activeMenu=null;
+let menuOpen = false; // Menu state
+let activeMenu = null; // Active item
 
+// Menu open/close
 function toggleMenu(){
- menuOpen=!menuOpen;
- renderMenu();
-}
-
-function renderMenu(){
- let panel=document.getElementById("menuPanel");
-
- if(!menuOpen){
-   panel.style.display="none";
-   return;
- }
-
- panel.style.display="block";
- panel.innerHTML="";
-
- Object.keys(menuData).forEach(item=>{
-   panel.innerHTML+=`
-   <div>
-     <div class="menu-title" onclick="toggleMenuItem('${item}')">
-       ${item} <span>${activeMenu===item?"▼":">"}</span>
-     </div>
-     <div class="menu-content" style="display:${activeMenu===item?'block':'none'}">
-       ${menuData[item]}
-     </div>
-   </div>`;
- });
-}
-
-function toggleMenuItem(item){
-
-  if(activeMenu === item){
-    activeMenu = null;   // close
-  } else {
-    activeMenu = item;   // open
-  }
-
+  menuOpen = !menuOpen;
   renderMenu();
 }
+
+// Menu render karna
+function renderMenu(){
+
+  let panel = document.getElementById("menuPanel");
+
+  if(!menuOpen){
+    panel.style.display="none";
+    return;
+  }
+
+  panel.style.display="block";
+  panel.innerHTML="";
+
+  // Menu items loop
+  Object.keys(menuData).forEach(item=>{
+    panel.innerHTML += `
+      <div>
+        <div class="menu-title" onclick="toggleMenuItem('${item}')">
+          ${item} <span>${activeMenu===item?"▼":">"}</span>
+        </div>
+        <div class="menu-content" style="display:${activeMenu===item?'block':'none'}">
+          ${menuData[item]}
+        </div>
+      </div>`;
+  });
+}
+
+// Menu item toggle
+function toggleMenuItem(item){
+  if(activeMenu === item){
+    activeMenu = null;
+  } else {
+    activeMenu = item;
+  }
+  renderMenu();
+}
+
 </script>
+
 </body>
 </html>
