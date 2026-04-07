@@ -7,9 +7,6 @@ from rest_framework.parsers import JSONParser
 import re
 
 
-class MenuView(APIView):
-    def get(self, request):
-        return Response({"message": "Menu working"})
     
 # MENU DATA
 # ---------------------------
