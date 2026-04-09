@@ -20,8 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-u!y1q6)h-=t+x9i1)zb)d=9(11l!&h+i9#ylcy71#swsrw+pf('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
+DEBUG = True
 
 # Application definition
 
@@ -53,16 +52,17 @@ MIDDLEWARE = [
 # settings.py
 CORS_ALLOWED_ORIGINS = [
     "https://limisha87.github.io",
-     "https://chatbot-4-az4c.onrender.com"
+    "https://chatbot-4-az4c.onrender.com"
 ]
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'chatbot_project.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR.parent / 'chatbot-frontend' / 'dist'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,6 +75,10 @@ TEMPLATES = [
 ]
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "chatbot" / "static"
+]
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
@@ -122,10 +126,10 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-DEBUG = True
 
 ALLOWED_HOSTS = [
     "chatbot-3-3cn3.onrender.com",
     "127.0.0.1",
     "localhost"
 ]
+
