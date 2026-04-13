@@ -133,8 +133,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 ALLOWED_HOSTS = [
-    "chatbot-3-3cn3.onrender.com",
-    "chatbot-4-az4c.onrender.com",
     "127.0.0.1",
     "localhost"
 ]
