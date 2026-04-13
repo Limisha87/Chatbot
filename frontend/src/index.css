@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================= GLOBAL ================= */
+
+@layer base {
+    body {
+        @apply bg-gray-100 font-sans;
+    }
+}
+
+@layer components {
+    /* ================= CHAT ICON ================= */
+    .chat-icon {
+        @apply fixed bottom-5 right-5 w-20 h-20 bg-orange-500 text-white flex items-center justify-center rounded-full cursor-pointer shadow-lg z-50 transition-colors overflow-hidden;
+    }
+    .chat-icon:hover {
+        @apply bg-orange-600;
+    }
+    /* ================= CHAT BOX ================= */
+    .chat-box {
+        @apply fixed bottom-20 right-5 w-96 h-[500px] bg-white border border-gray-300 rounded-xl shadow-2xl flex flex-col z-50;
+    }
+    /* ================= HEADER ================= */
+    .chat-header {
+        @apply bg-orange-500 text-white p-3 rounded-t-xl flex justify-between items-center relative;
+    }
+    /* ================= CONTENT ================= */
+    .chat-content {
+        @apply flex-1 p-3 overflow-y-auto;
+    }
+    /* ================= HOME BUTTONS ================= */
+    /* USER BUTTON (soft peach) */
+    .btn-orange {
+        @apply px-6 py-3 rounded-full font-medium shadow-md transition-all;
+        @apply bg-[#fcd9b6] text-[#b45309];
+    }
+    .btn-orange:hover {
+        @apply bg-[#fbbf24] scale-105 shadow-lg;
+    }
+    /* NUTRITIONIST BUTTON (soft yellow) */
+    .btn-green {
+        @apply px-6 py-3 rounded-full font-medium shadow-md transition-all;
+        @apply bg-[#fde68a] text-[#92400e];
+    }
+    .btn-green:hover {
+        @apply bg-[#fdba74] scale-105 shadow-lg;
+    }
+    /* ================= CATEGORY BUTTONS (UI like image) ================= */
+    .btn-category {
+        @apply bg-orange-200 text-orange-800 px-4 py-3 rounded-full text-center shadow-md transition-all;
+    }
+    .btn-category:hover {
+        @apply bg-orange-300 scale-105;
+    }
+    /* ================= QUESTION BOX ================= */
+    .question-box {
+        @apply bg-gray-200 p-3 rounded-full cursor-pointer transition-all;
+    }
+    .question-box:hover {
+        @apply bg-gray-300;
+    }
+    /* ================= ANSWER BOX ================= */
+    .answer-box {
+        @apply bg-orange-100 text-orange-800 p-3 mt-2 rounded-lg border-l-4 border-orange-400;
+    }
+    /* ================= MENU ================= */
+    .menu-dropdown {
+        @apply absolute top-full right-2 mt-2 w-64 bg-white text-black shadow-lg rounded-xl border z-50;
+    }
+    .menu-item {
+        @apply p-3 flex justify-between cursor-pointer transition-all;
+    }
+    .menu-item:hover {
+        @apply bg-gray-100;
+    }
+    /* ================= LOADER ================= */
+    .loader {
+        @apply animate-spin rounded-full h-4 w-4 border-b-2 border-orange-500;
+    }
+}
