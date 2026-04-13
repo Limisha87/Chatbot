@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrackIn-Take Bot</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="{% static 'chatbot/css/index.css' %}">
+<script src="{% static 'chatbot/js/script.js' %}"></script>
+
+</head>
+<body>
+
+<div class="chatbot-logo" id="chatIcon">
+ <img src="{% static 'chatbot/icon.png' %}" alt="chatbot">
+</div>
+
+<div id="chatBox" class="chatbot-container">
+  <div class="header">
+    <span onclick="goBack()">←</span>
+    <span>TrackIn-Take Bot</span>
+    <span onclick="toggleMenu()">☰</span>
+  </div>
+
+  <div id="menuPanel" class="menu-panel"></div>
+  <div id="content"></div>
+</div>
+
+<!-- ✅ JS FILE HERE -->
+<script src="{% static 'chatbot/js/script.js' %}"></script>
+
+</body>
+</html> 
+

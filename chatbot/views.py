@@ -6,12 +6,26 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 import re
 from django.shortcuts import render
+<<<<<<< HEAD
 from django.http import HttpResponse
 
 def home(request):
     return HttpResponse("Backend Running 🚀")
     return render(request, 'chatbot/index.html')
  
+=======
+
+def home(request):
+    return render(request, 'chatbot/index.html')
+    
+# MENU DATA
+# ---------------------------
+MENU_DATA = {
+    "About TrackIntake": "TrackIntake is an AI-powered nutrition and health tracking platform that helps you log your daily meals, monitor your nutrition, and receive personalized diet recommendations.",
+    "Data & Security": "Your data is safe, secure, and never shared without your permission.",
+    "Contact Us": "📞 7898622813"
+}
+>>>>>>> ebb7336d7912df06e592d12b7199bdec0d1dff36
 
 # ---------------------------
 # USER FAQ
