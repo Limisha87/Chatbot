@@ -20,11 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-u!y1q6)h-=t+x9i1)zb)d=9(11l!&h+i9#ylcy71#swsrw+pf('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-<<<<<<< HEAD
+
 DEBUG = False
-=======
-DEBUG = True
->>>>>>> ebb7336d7912df06e592d12b7199bdec0d1dff36
+
+
 
 # Application definition
 
@@ -42,48 +41,43 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-<<<<<<< HEAD
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 
     'corsheaders.middleware.CorsMiddleware',
 
-=======
+
     'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
->>>>>>> ebb7336d7912df06e592d12b7199bdec0d1dff36
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-<<<<<<< HEAD
-]
-=======
     
->>>>>>> ebb7336d7912df06e592d12b7199bdec0d1dff36
+
 ]
 
 # settings.py
 CORS_ALLOWED_ORIGINS = [
-    "https://limisha87.github.io",
-    "https://chatbot-4-az4c.onrender.com"
+     "http://127.0.0.1:3000",
 ]
 CORS_ALLOW_CREDENTIALS = True
-<<<<<<< HEAD
+
 CORS_ALLOW_ALL_ORIGINS = False
-=======
+
 CORS_ALLOW_ALL_ORIGINS = True
->>>>>>> ebb7336d7912df06e592d12b7199bdec0d1dff36
+
 
 ROOT_URLCONF = 'chatbot_project.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'frontend/build')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -102,7 +96,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'chatbot/static'),
+    os.path.join(BASE_DIR, 'frontend/bulid/static'),
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -153,14 +147,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 ALLOWED_HOSTS = [
-<<<<<<< HEAD
+
     "127.0.0.1",
-    "localhost",
-    "chatbot-3-3cn3.onrender.com"
-=======
-    "chatbot-3-3cn3.onrender.com",
-    "127.0.0.1",
-    "localhost"
->>>>>>> ebb7336d7912df06e592d12b7199bdec0d1dff36
+    # "localhost",
+    # "chatbot-3-3cn3.onrender.com"
+
+
 ]
 

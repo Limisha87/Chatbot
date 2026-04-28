@@ -6,16 +6,14 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 import re
 from django.shortcuts import render
-<<<<<<< HEAD
-from django.http import HttpResponse
+from django.http import JsonResponse
 
-def home(request):
-    return HttpResponse("Backend Running 🚀")
-    return render(request, 'chatbot/index.html')
- 
-=======
 
-def home(request):
+def backend_status(request):
+    return JsonResponse({"message": "Backend is running"})
+
+
+def chatbot_page(request):
     return render(request, 'chatbot/index.html')
     
 # MENU DATA
@@ -25,7 +23,7 @@ MENU_DATA = {
     "Data & Security": "Your data is safe, secure, and never shared without your permission.",
     "Contact Us": "📞 7898622813"
 }
->>>>>>> ebb7336d7912df06e592d12b7199bdec0d1dff36
+
 
 # ---------------------------
 # USER FAQ
